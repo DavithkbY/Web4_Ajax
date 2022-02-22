@@ -40,24 +40,28 @@ function loadNews() {
             error.remove();
         });
         form.preventDefault();
-        let author = document.getElementById("inputAuthor").value;
-        let content = document.getElementById("inputText").value;
-        let title = document.getElementById("inputTitle").value;
+        let author = document.getElementById("inputAuthor");
+        let content = document.getElementById("inputText");
+        let title = document.getElementById("inputTitle");
         addNewsRequest.open("POST", "/news", true);
         addNewsRequest.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-        addNewsRequest.send(JSON.stringify({ "author": author, "content": content,"title":title }));
+        addNewsRequest.send(JSON.stringify({ "author": author.value, "content": content.value,"title":title.value }));
         addNewsRequest.onreadystatechange = function() {
             if (addNewsRequest.readyState == XMLHttpRequest.DONE) {
 
                 const responseText = JSON.parse(addNewsRequest.responseText);
                 const status = responseText.status;
                 if(status == 400){
-                    console.log(responseText.errors.length)
                     for (let r = 0; r < responseText.errors.length; r++) {
                         const div = document.getElementById(responseText.errors[r].field);
                         div.innerHTML += "<div class=\"alert alert-danger\" role=\"alert\">\n"+responseText.errors[r].defaultMessage +
                             "</div>"
                     }
+                }else{
+                    author.value = '';
+                    content.value = '';
+                    title.value = '';
+                    loadNews();
                 }
             }}
     }
