@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head></head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-primary mb-5">
+        <div class="container">
+            <a href="/" class="navbar-brand">Website</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"
+                        th:classappend="${current == 'overview-news' ? 'active' : ''}">
+                        <a class="nav-link" href="overview-news">News</a>
+                    </li>
+                    <li class="nav-item"
+                        th:classappend="${current == 'add-news' ? 'active' : ''}">
+                        <a class="nav-link" href="add-news">Add news</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+</body>
+</html>
