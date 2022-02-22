@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head::head(title='Add news')">
+</head>
+<body>
+<header th:replace="fragments/header :: header(current='add-news')"></header>
+<main>
+    <div class="container-lg">
+        <form>
+            <div class="mb-3 row">
+                <label for="inputTitle" class="col-sm-2 col-form-label">Title</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputTitle">
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="inputContent" class="col-sm-2 col-form-label">Content</label>
+                <div class="col-sm-10">
+                    <textarea type="text" class="form-control" id="inputContent"></textarea>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="inputAuthor" class="col-sm-2 col-form-label">Author</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputAuthor">
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+</html>
