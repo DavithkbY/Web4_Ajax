@@ -31,13 +31,10 @@ public class NewsController {
         return "news-overview";
     }
 
-    @PostMapping("/add-news")
-    public ResponseEntity<News> addNews (@RequestBody @Valid News news, BindingResult result){
-        if (result.hasErrors()){
-            return new ResponseEntity<News>(news,HttpStatus.NOT_ACCEPTABLE);
-        }
-        repository.save(news);
-        return new ResponseEntity<News>(news,HttpStatus.OK);
+    @PostMapping("/news")
+    @ResponseBody
+    public News add(@Valid @RequestBody News news){
+        return repository.save(news);
     }
 
     // API
@@ -47,10 +44,5 @@ public class NewsController {
         return repository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
     }
 
-    @PostMapping("/news")
-    @ResponseBody
-    public News add(@Valid @RequestBody News news){
-        return repository.save(news);
-    }
 
 }

@@ -35,17 +35,30 @@ function loadNews() {
     let addNewsRequest = new XMLHttpRequest();
 
     function addNews (form) {
+        const errors = document.querySelectorAll('.alert-danger');
+        errors.forEach(error => {
+            error.remove();
+        });
         form.preventDefault();
         let author = document.getElementById("inputAuthor").value;
         let content = document.getElementById("inputText").value;
         let title = document.getElementById("inputTitle").value;
-        addNewsRequest.open("POST", "/add-news", true);
+        addNewsRequest.open("POST", "/news", true);
         addNewsRequest.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
         addNewsRequest.send(JSON.stringify({ "author": author, "content": content,"title":title }));
-        if(addNewsRequest.response.ok){
-            author.value = '';
-            content.value = '';
-            title.value = '';
-        }
+        addNewsRequest.onreadystatechange = function() {
+            if (addNewsRequest.readyState == XMLHttpRequest.DONE) {
+
+                const responseText = JSON.parse(addNewsRequest.responseText);
+                const status = responseText.status;
+                if(status == 400){
+                    console.log(responseText.errors.length)
+                    for (let r = 0; r < responseText.errors.length; r++) {
+                        const div = document.getElementById(responseText.errors[r].field);
+                        div.innerHTML += "<div class=\"alert alert-danger\" role=\"alert\">\n"+responseText.errors[r].defaultMessage +
+                            "</div>"
+                    }
+                }
+            }}
     }
 }
