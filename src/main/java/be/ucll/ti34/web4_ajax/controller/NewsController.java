@@ -44,9 +44,8 @@ public class NewsController {
 
     @PostMapping("/news")
     @ResponseBody
-    public ResponseEntity<News> add(@Valid @RequestBody News news){
-        repository.save(news);
-        return new ResponseEntity<>(news, HttpStatus.CREATED);
+    public News add(@Valid @RequestBody News news){
+        return repository.save(news);
     }
 
 }
