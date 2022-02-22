@@ -17,9 +17,8 @@ public class Web4AjaxApplication {
     @Bean
     public CommandLineRunner data(NewsRepository newsRepo) {
         return (args) -> {
-            newsRepo.save(new News("Test", "Test", "Test"));
-            newsRepo.save(new News("Test2", "Test2", "Test2"));
-            newsRepo.save(new News("Test3", "Test3", "Test3"));
+            newsRepo.save(new News("Miniemen blut", "Het miniemeninstituut is al zijn geld kwijt", "Rob"));
+            newsRepo.save(new News("UCLL Rijk", "De UCLL heeft ineens heel veel geld gekregen van een donor", "Bob"));
         };
     }
 

@@ -4,10 +4,12 @@ package be.ucll.ti34.web4_ajax.controller;
 import be.ucll.ti34.web4_ajax.model.News;
 import be.ucll.ti34.web4_ajax.repository.NewsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,17 +31,20 @@ public class NewsController {
         return "news-overview";
     }
 
-    @GetMapping("/add-news")
-    public String addNews (Model model){
-        return "add-news";
+    @PostMapping("/add-news")
+    public ResponseEntity<News> addNews (@RequestBody @Valid News news, BindingResult result){
+        if (result.hasErrors()){
+            return new ResponseEntity<News>(news,HttpStatus.NOT_ACCEPTABLE);
+        }
+        repository.save(news);
+        return new ResponseEntity<News>(news,HttpStatus.OK);
     }
-
 
     // API
     @GetMapping("/news")
     @ResponseBody
     public List<News> all(){
-        return repository.findAll();
+        return repository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
     }
 
     @PostMapping("/news")

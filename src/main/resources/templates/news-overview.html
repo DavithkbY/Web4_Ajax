@@ -4,22 +4,25 @@
 </head>
 <body>
 <header th:replace="fragments/header :: header(current='overview-news')"></header>
-<main>
-    <div class="container-lg">
-        <table class="table table-striped table-responsive-lg">
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Content</th>
-                <th>Author</th>
-                <th>Date</th>
-            </tr>
-            </thead>
-            <tbody id="table-body">
-            </tbody>
-        </table>
+<main class="container">
+    <div id="mainContainer">
     </div>
+
+    <form id="addNewsForm">
+        <div class="form-group">
+            <label for="inputTitle">Title</label>
+            <input type="text" class="form-control" id="inputTitle" aria-describedby="titleHelp" placeholder="Enter title">
+        </div>
+        <div class="form-group">
+            <label for="inputText">Text</label>
+            <textarea class="form-control" id="inputText" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="inputAuthor">Author</label>
+            <input type="text" class="form-control" id="inputAuthor" aria-describedby="authorHelp" placeholder="Enter author">
+        </div>
+        <button class="btn btn-primary" id="addNewsButton">Add</button>
+    </form>
 </main>
 <script type="text/javascript" th:src="@{/js/news-overview.js}"></script>
 </body>
