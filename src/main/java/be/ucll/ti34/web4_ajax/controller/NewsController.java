@@ -24,17 +24,10 @@ public class NewsController {
     @Autowired
     private NewsRepository repository;
 
-
     // Views
     @GetMapping("/news-overview")
     public String overview (Model model){
         return "news-overview";
-    }
-
-    @PostMapping("/news")
-    @ResponseBody
-    public News add(@Valid @RequestBody News news){
-        return repository.save(news);
     }
 
     // API
@@ -42,6 +35,12 @@ public class NewsController {
     @ResponseBody
     public List<News> all(){
         return repository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
+    }
+
+    @PostMapping("/news")
+    @ResponseBody
+    public News add(@Valid @RequestBody News news){
+        return repository.save(news);
     }
 
 
