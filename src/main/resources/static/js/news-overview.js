@@ -15,7 +15,7 @@ function loadNews() {
             }
         }
     };
-    xhttp.open("GET", "http://localhost:8080/news", true);
+    xhttp.open("GET", "/news", true);
     xhttp.send();
     setTimeout(loadNews, 2000);
 }
