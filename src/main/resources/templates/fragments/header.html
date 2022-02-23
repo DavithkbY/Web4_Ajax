@@ -5,14 +5,14 @@
 <header>
     <nav class="navbar navbar-expand-sm navbar-dark bg-primary mb-5">
         <div class="container">
-            <a href="/" class="navbar-brand">Website</a>
+            <a href="/" class="navbar-brand">UCLL News</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"
+                    <li class="nav-item d-none"
                         th:classappend="${current == 'overview-news' ? 'active' : ''}">
                         <a class="nav-link" href="news-overview">News</a>
                     </li>
