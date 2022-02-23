@@ -23,13 +23,13 @@ function loadNews() {
 function getCard(title, content, date, author) {
     const d = new Date(date).toLocaleDateString();
     return "<div class='card text-center col-md-12 mb-3'>\n" +
-        "            <div class='card-header'>" + title + "</div>\n" +
+        "            <div class='card-header'>" + EntitiesHtml(title)+ "</div>\n" +
         "            <div class='card-body'>\n" +
-        "                <p class='card-text'>" + content + "</p>\n" +
+        "                <p class='card-text'>" + EntitiesHtml(content) + "</p>\n" +
         "            </div>\n" +
         "            <div  class='card-footer text-muted'>" +
         "               <p class='float-start'>" + d + "</p>" +
-        "               <p class='float-end'>" + author + "</p>" +
+        "               <p class='float-end'>" + EntitiesHtml(author) + "</p>" +
         "            </div>\n" +
         "        </div>"
 }
@@ -75,4 +75,9 @@ function addNews(form) {
             }
         }
     }
+}
+
+
+function EntitiesHtml(string) {
+    return String(string).replace(/&/g, '&amp;').replace(/>/g, '&gt;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
 }

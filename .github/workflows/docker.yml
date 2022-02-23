@@ -47,3 +47,9 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Deploy docker image
+        uses: fjogeleit/http-request-action@v1.8.1
+        with:
+          url: https://portainer.mella.dev/api/webhooks/16c56122-7e48-4756-9876-5792c9df57b6
+          timeout: 10000
