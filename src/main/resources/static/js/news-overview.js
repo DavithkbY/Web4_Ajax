@@ -1,14 +1,15 @@
 window.onload = loadNews
-let data;
+let length;
 
 function loadNews() {
     const xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             const container = document.getElementById('mainContainer')
-            if (JSON.parse(this.responseText) !== data) {
+            if (this.responseText.length !== length) {
                 container.innerHTML = "";
-                data = JSON.parse(this.responseText)
+                let data = JSON.parse(this.responseText)
+                length = this.responseText.length
                 for (let r = 0; r < data.length; r++) {
                     container.innerHTML += getCard(data[r].title, data[r].content, data[r].createdAt, data[r].author)
                 }
@@ -22,7 +23,7 @@ function loadNews() {
 
 function getCard(title, content, date, author) {
     const d = new Date(date).toLocaleDateString();
-    return "<div class='card text-center col-md-12 mb-3'>\n" +
+    return "<div class='card col-md-12 mb-3'>\n" +
         "            <div class='card-header'>" + EntitiesHtml(title)+ "</div>\n" +
         "            <div class='card-body'>\n" +
         "                <p class='card-text'>" + EntitiesHtml(content) + "</p>\n" +
