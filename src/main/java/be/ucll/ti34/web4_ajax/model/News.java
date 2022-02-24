@@ -41,6 +41,7 @@ public class News {
     }
 
     @NotBlank()
+    @Column(columnDefinition = "TEXT")
     private String content;
     public String getContent() {
         return content;
