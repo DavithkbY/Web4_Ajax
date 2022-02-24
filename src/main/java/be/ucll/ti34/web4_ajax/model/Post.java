@@ -1,21 +1,19 @@
 package be.ucll.ti34.web4_ajax.model;
 
 
-import org.hibernate.annotations.CreationTimestamp;
-
 import javax.persistence.*;
-import javax.validation.constraints.*;
-import java.sql.Timestamp;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(
-        name= "news"
+        name = "news"
 )
 
-public class News {
+public class Post extends Audit {
+    public Post() {
+    }
 
-    public News() {}
-    public News(String title, String content, String author) {
+    public Post(String title, String content, String author) {
         this.title = title;
         this.content = content;
         this.author = author;
@@ -41,7 +39,7 @@ public class News {
     }
 
     @NotBlank()
-    @Column(columnDefinition = "TEXT")
+    @Lob
     private String content;
     public String getContent() {
         return content;
@@ -57,14 +55,5 @@ public class News {
     }
     public void setAuthor(String author) {
         this.author = author;
-    }
-
-    @CreationTimestamp
-    private Timestamp createdAt;
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
     }
 }

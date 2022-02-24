@@ -16,7 +16,7 @@ function loadNews() {
             }
         }
     };
-    xhttp.open("GET", "/news", true);
+    xhttp.open("GET", "/posts", true);
     xhttp.send();
     setTimeout(loadNews, 2000);
 }
@@ -52,7 +52,7 @@ function addNews(form) {
     let content = document.getElementById("inputContent");
     let title = document.getElementById("inputTitle");
 
-    addNewsRequest.open("POST", "/news", true);
+    addNewsRequest.open("POST", "/posts", true);
     addNewsRequest.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
     addNewsRequest.send(JSON.stringify({"author": author.value, "content": content.value, "title": title.value}));
     addNewsRequest.onreadystatechange = function () {
