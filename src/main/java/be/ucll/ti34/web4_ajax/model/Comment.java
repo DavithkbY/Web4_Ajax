@@ -1,15 +1,12 @@
 package be.ucll.ti34.web4_ajax.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "comments")
 public class Comment extends Audit {
-    public Comment() {
-    }
+    public Comment() {}
     public Comment(String text) {
         this.text = text;
     }
@@ -32,16 +29,5 @@ public class Comment extends Audit {
     }
     public void setText(String text) {
         this.text = text;
-    }
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "post_id", nullable = false)
-    @JsonIgnore
-    private Post post;
-    public Post getPost() {
-        return post;
-    }
-    public void setPost(Post post) {
-        this.post = post;
     }
 }

@@ -4,11 +4,10 @@ import be.ucll.ti34.web4_ajax.model.Comment;
 import be.ucll.ti34.web4_ajax.repository.CommentRepository;
 import be.ucll.ti34.web4_ajax.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -20,15 +19,17 @@ public class CommentController {
     private PostRepository postRepository;
 
     @GetMapping("/posts/{postId}/comments")
-    public Page<Comment> getAllCommentsByPostId(@PathVariable(value = "postId") Long postId, Pageable pageable) {
-        return commentRepository.findByPostId(postId, pageable);
+    public List<Comment> getAllCommentsByPostId(@PathVariable("postId") Long postId) {
+        return postRepository.findCommentsByPostId(postId);
     }
 
     @PostMapping("/posts/{postId}/comments")
     public Optional<Comment> createComment(@PathVariable(value = "postId") Long postId, @Valid @RequestBody Comment comment) {
         return postRepository.findById(postId).map(post -> {
-            comment.setPost(post);
-            return commentRepository.save(comment);
+            Comment c = this.commentRepository.save(comment);
+            post.getComments().add(c);
+            postRepository.save(post);
+            return c;
         });
     }
 

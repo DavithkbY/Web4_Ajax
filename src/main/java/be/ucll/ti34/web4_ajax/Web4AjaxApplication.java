@@ -24,18 +24,19 @@ public class Web4AjaxApplication {
             Post post1 = new Post("Miniemen blut", "Het miniemeninstituut is al zijn geld kwijt", "Rob");
             Post post2 = new Post("UCLL Rijk", "De UCLL heeft ineens heel veel geld gekregen van een donor", "Bob");
 
+            Comment comment1 = new Comment("Wat leuk!");
+            Comment comment2 = new Comment("Wat leuk man!");
+            Comment comment3 = new Comment("Tof!");
+
+            post1.getComments().add(comment1);
+            post1.getComments().add(comment2);
+            post2.getComments().add(comment3);
+
+
             postRepo.save(post1);
             postRepo.save(post2);
 
-            Comment comment1 = new Comment("Wat leuk!");
-            comment1.setPost(post1);
-            comRepo.save(comment1);
-            Comment comment2 = new Comment("Wat leuk!");
-            comment2.setPost(post2);
-            comRepo.save(comment2);
-            Comment comment3 = new Comment("Tof!");
-            comment3.setPost(post2);
-            comRepo.save(comment3);
+
         };
     }
 

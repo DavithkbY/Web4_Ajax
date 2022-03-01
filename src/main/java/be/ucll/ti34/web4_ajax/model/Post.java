@@ -3,6 +3,8 @@ package be.ucll.ti34.web4_ajax.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(
@@ -10,9 +12,7 @@ import javax.validation.constraints.NotBlank;
 )
 
 public class Post extends Audit {
-    public Post() {
-    }
-
+    public Post() {}
     public Post(String title, String content, String author) {
         this.title = title;
         this.content = content;
@@ -55,5 +55,15 @@ public class Post extends Audit {
     }
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @OrderBy("createdAt ASC")
+    private Set<Comment> comments = new HashSet<>();
+    public Set<Comment> getComments() {
+        return comments;
+    }
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 }
