@@ -10,9 +10,10 @@ function loadNews() {
                 container.innerHTML = "";
                 let data = JSON.parse(this.responseText)
                 length = this.responseText.length
-                for (let r = 0; r < data.length; r++) {
-                    container.innerHTML += getCard(data[r].title, data[r].content, data[r].createdAt, data[r].author)
-                }
+                data.forEach(post => {
+                    container.innerHTML += getCard(post.title, post.content, post.createdAt, post.author)
+                    container.innerHTML += getComments(post.id)
+                })
             }
         }
     };
@@ -23,16 +24,67 @@ function loadNews() {
 
 function getCard(title, content, date, author) {
     const d = new Date(date).toLocaleDateString();
-    return "<div class='card col-md-12 mb-3'>\n" +
-        "            <div class='card-header'>" + EntitiesHtml(title)+ "</div>\n" +
-        "            <div class='card-body'>\n" +
-        "                <p class='card-text'>" + EntitiesHtml(content) + "</p>\n" +
-        "            </div>\n" +
-        "            <div  class='card-footer text-muted'>" +
-        "               <p class='float-start'>" + d + "</p>" +
-        "               <p class='float-end'>" + EntitiesHtml(author) + "</p>" +
-        "            </div>\n" +
-        "        </div>"
+    return `
+    <div class='card col-md-12 mb-3'>
+        <div class='card-header'>${EntitiesHtml(title)}</div>
+            <div class='card-body'>
+                <p class='card-text'>${EntitiesHtml(content)}</p>
+            </div>
+            <div  class='card-footer text-muted'>
+                <p class='float-start'>${d}</p>
+                <p class='float-end'>${EntitiesHtml(author)}</p>
+            </div>
+        </div>
+    `
+}
+
+function getComments(id) {
+    let innerHTML = ""
+    fetch(`/posts/${id}/comments`)
+        .then(comments => {
+            innerHTML += `
+                <div class="row d-flex justify-content-end">
+                    <div class="col-md-10 pb-3">
+                        <h3 class="py-2">Comments</h3>
+                `
+            comments.forEach(comment => {
+                const d = new Date(comment.createdAt).toLocaleDateString();
+                innerHTML += `
+                    <div class="card p-3 mb-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="user d-flex flex-row align-items-center"> 
+                                <small class="fw-bold">Author</small>
+                            </div> 
+                            <small>${d}</small>
+                        </div>
+                        <small class="pt-2">${comment.text}</small>
+                    </div>
+            `
+            })
+            innerHTML += `
+                <form class="py-2">
+                    <div class="row mb-3">
+                        <div class="col-sm-10" id="author">
+                            <input type="text" class="form-control" id="inputAuthor" aria-describedby="authorHelp" placeholder="Enter author">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-10" id="text">
+                            <textarea type="text" class="form-control" id="inputText" aria-describedby="contentHelp" placeholder="Enter comment" rows="2"></textarea>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-primary" id="addCommentButton">Comment</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        `
+        })
+        .catch(error => {
+            // handle the error
+        });
+    return innerHTML
 }
 
 const form = document.querySelector("form");

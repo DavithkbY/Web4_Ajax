@@ -24,9 +24,9 @@ public class Web4AjaxApplication {
             Post post1 = new Post("Miniemen blut", "Het miniemeninstituut is al zijn geld kwijt", "Rob");
             Post post2 = new Post("UCLL Rijk", "De UCLL heeft ineens heel veel geld gekregen van een donor", "Bob");
 
-            Comment comment1 = new Comment("Wat leuk!");
-            Comment comment2 = new Comment("Wat leuk man!");
-            Comment comment3 = new Comment("Tof!");
+            Comment comment1 = new Comment("Davit","Wat leuk!");
+            Comment comment2 = new Comment("Ignace","Wat leuk man!");
+            Comment comment3 = new Comment("Lander","Tof!");
 
             post1.getComments().add(comment1);
             post1.getComments().add(comment2);

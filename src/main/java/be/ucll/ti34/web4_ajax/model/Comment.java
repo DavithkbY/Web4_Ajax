@@ -7,7 +7,8 @@ import javax.validation.constraints.NotBlank;
 @Table(name = "comments")
 public class Comment extends Audit {
     public Comment() {}
-    public Comment(String text) {
+    public Comment(String author, String text) {
+        this.author = author;
         this.text = text;
     }
 
@@ -19,6 +20,15 @@ public class Comment extends Audit {
     }
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @NotBlank()
+    private String author;
+    public String getAuthor() {
+        return author;
+    }
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     @NotBlank

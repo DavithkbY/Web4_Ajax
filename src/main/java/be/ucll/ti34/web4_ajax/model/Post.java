@@ -1,6 +1,8 @@
 package be.ucll.ti34.web4_ajax.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
@@ -59,6 +61,7 @@ public class Post extends Audit {
 
     @OneToMany(cascade = CascadeType.ALL)
     @OrderBy("createdAt ASC")
+    @JsonIgnore
     private Set<Comment> comments = new HashSet<>();
     public Set<Comment> getComments() {
         return comments;
