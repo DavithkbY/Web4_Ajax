@@ -46,11 +46,11 @@ function getComment(author, text, date) {
             <div class="card p-3 mb-2">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="user d-flex flex-row align-items-center"> 
-                        <small class="fw-bold">${author}</small>
+                        <small class="fw-bold">${EntitiesHtml(author)}</small>
                     </div> 
                     <small>${d}</small>
                 </div>
-                <small class="pt-2">${text}</small>
+                <small class="pt-2">${EntitiesHtml(text)}</small>
             </div>
     `
 }
@@ -64,6 +64,7 @@ async function getComments(id) {
             <div class="col-md-10 pb-3" id="comments-${id}">
                 <h3 class="py-2">Comments</h3>
         `
+    comments = comments.slice(-5)
     comments.forEach(comment => {
         innerHTML += getComment(comment.author,comment.text,comment.createdAt)
     })

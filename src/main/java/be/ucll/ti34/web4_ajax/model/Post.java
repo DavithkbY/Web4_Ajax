@@ -1,8 +1,6 @@
 package be.ucll.ti34.web4_ajax.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
