@@ -4,6 +4,8 @@ import be.ucll.ti34.web4_ajax.model.Comment;
 import be.ucll.ti34.web4_ajax.repository.CommentRepository;
 import be.ucll.ti34.web4_ajax.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,7 +22,8 @@ public class CommentController {
 
     @GetMapping("/posts/{postId}/comments")
     public List<Comment> getAllCommentsByPostId(@PathVariable("postId") Long postId) {
-        return postRepository.findCommentsByPostId(postId);
+        Pageable topFive = PageRequest.of(0, 5);
+        return postRepository.findCommentsByPostId(postId, topFive);
     }
 
     @GetMapping("/comments/{author}/comments")

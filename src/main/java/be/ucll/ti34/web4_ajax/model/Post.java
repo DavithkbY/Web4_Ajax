@@ -61,7 +61,6 @@ public class Post extends Audit {
 
     @OneToMany(cascade = CascadeType.ALL)
     @OrderBy("createdAt ASC")
-    @JsonIgnore
     private Set<Comment> comments = new HashSet<>();
     public Set<Comment> getComments() {
         return comments;
