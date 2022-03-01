@@ -23,6 +23,11 @@ public class CommentController {
         return postRepository.findCommentsByPostId(postId);
     }
 
+    @GetMapping("/comments/{author}/comments")
+    public List<Comment> getAllCommentsByAuthorId(@PathVariable("author") String author){
+        return commentRepository.getCommentsByAuthorIgnoreCase(author);
+    }
+
     @PostMapping("/posts/{postId}/comments")
     public Optional<Comment> createComment(@PathVariable(value = "postId") Long postId, @Valid @RequestBody Comment comment) {
         return postRepository.findById(postId).map(post -> {
