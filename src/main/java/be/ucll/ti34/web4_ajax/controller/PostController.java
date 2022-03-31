@@ -21,6 +21,12 @@ public class PostController {
         return repository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
     }
 
+    @GetMapping("/newsitems")
+    public List<Post> allNewsItems() {
+        return repository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
+    }
+
+
     @GetMapping("/posts/{id}")
     public Optional<Post> getById(@PathVariable("id") long id) {
         return repository.findById(id);

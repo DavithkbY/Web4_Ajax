@@ -40,6 +40,7 @@ function getCard(title, content, date, author) {
     `
 }
 
+
 function getComment(author, text, date) {
     const d = new Date(date).toLocaleDateString();
     return `
