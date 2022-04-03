@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org">
-<head th:replace="fragments/head::head(title='home')">
+<head th:replace="fragments/head::head(title='UCLL News')">
 </head>
 <body>
 <header th:replace="fragments/header :: header(current='index')"></header>
 <main class="container">
     <div id="mainContainer">
     </div>
-
-    <form id="addNewsForm pt-3">
+    <form id="addNewsForm">
         <h2>Add News</h2>
         <div class="row mb-3">
             <label class="col-sm-2 col-form-label" for="inputTitle">Title</label>
@@ -31,6 +30,6 @@
         <button class="btn btn-primary" id="addNewsButton">Add</button>
     </form>
 </main>
-<script type="text/javascript" th:src="@{/js/news-overview.js}"></script>
+<script type="text/javascript" th:src="@{/js/posts.js}"></script>
 </body>
 </html>

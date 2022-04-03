@@ -1,21 +1,19 @@
 package be.ucll.ti34.web4_ajax.model;
 
 
-import org.hibernate.annotations.CreationTimestamp;
-
 import javax.persistence.*;
-import javax.validation.constraints.*;
-import java.sql.Timestamp;
+import javax.validation.constraints.NotBlank;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(
-        name= "news"
+        name = "news"
 )
 
-public class News {
-
-    public News() {}
-    public News(String title, String content, String author) {
+public class Post extends Audit {
+    public Post() {}
+    public Post(String title, String content, String author) {
         this.title = title;
         this.content = content;
         this.author = author;
@@ -41,7 +39,7 @@ public class News {
     }
 
     @NotBlank()
-    @Column(columnDefinition = "TEXT")
+    @Lob
     private String content;
     public String getContent() {
         return content;
@@ -59,12 +57,13 @@ public class News {
         this.author = author;
     }
 
-    @CreationTimestamp
-    private Timestamp createdAt;
-    public Timestamp getCreatedAt() {
-        return createdAt;
+    @OneToMany(cascade = CascadeType.ALL)
+    @OrderBy("createdAt ASC")
+    private Set<Comment> comments = new HashSet<>();
+    public Set<Comment> getComments() {
+        return comments;
     }
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 }

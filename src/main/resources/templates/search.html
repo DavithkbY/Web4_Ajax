@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head th:replace="fragments/head::head(title='Search')"></head>
+<body>
+<header th:replace="fragments/header :: header(current='search')"></header>
+<main class="container">
+    <div id="mainContainer">
+        <form>
+            <div class="form-group">
+                <label for="inputSearch">Author</label>
+                <input type="text" class="form-control" id="inputSearch" aria-describedby="inputSearch" placeholder="Enter author">
+            </div>
+            <button onclick="searchComment()" id="searchButton" type="button" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+    <div id="tableContainer">
+
+    </div>
+</main>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://momentjs.com/downloads/moment.min.js"></script>
+<script type="text/javascript" th:src="@{/js/search.js}"></script>
+</body>
+</html>
